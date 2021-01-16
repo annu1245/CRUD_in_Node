@@ -32,7 +32,9 @@ function insertRecord(req,res){
 router.get('/list/', (req,res)=>{
   Employee.find((err,docs)=>{
     if(!err){
-    res.render('main',{layout:'list'});
+      console.log(docs);
+      res.render('layouts/list',{list:docs, layout:false})
+
     }
     else{
       console.log('error:'+ err);

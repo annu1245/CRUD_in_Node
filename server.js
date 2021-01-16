@@ -3,7 +3,7 @@ require('./models/db')
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-
+const path = require('path');
 const employeeController = require('./controllers/employeeController');
 
 app.use(bodyParser.urlencoded({
@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-
+app.set('views', path.join(__dirname, 'views/'));
 const handlebars = require('express-handlebars');
 // const bodyParser = require('body-parser');
 app.set('view engine', 'hbs')
