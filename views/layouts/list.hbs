@@ -1,19 +1,23 @@
-<h1>hi</h1>
-<h2>{{list}}</h2>
-<table>
+<a class="btn btn-secondary float-right mt-2" href="/employee"><i class="fa fa-plus"></i>Create New</a>
+<h1>Employees<i class="fas fa-users"></i></h1>
+<table class="table table-dark table-striped">
     <tr>
         <th>FullName</th>
         <th>Email</th>
         <th>Mobile</th>
-        <th>city</th>
+        <th>City</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <tbody>
-        {{#each list}}
+        {{#each lst}}
         <tr>
             <td>{{this.fullName}}</td>
             <td>{{this.email}}</td>
             <td>{{this.mobile}}</td>
             <td>{{this.city}}</td>
+            <td><a href="/employee/edit/{{this._id}}"><i class="fas fa-user-edit"></i></a></td>
+            <td><a href="/employee/delete/{{this._id}}"><i class="fas fa-trash-alt"></i></a></td>
         </tr>
         {{/each}}
     </tbody>

@@ -1,4 +1,4 @@
-<h1>The body</h1>
+<h1>{{viewTitle}}</h1>
   <div id="login">
         <h3 class="text-center text-white pt-5">Login form</h3>
         <div class="container">
@@ -6,29 +6,29 @@
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
 
-                        <form id="login-form" class="form" action="#" method="post">
+                        <form id="login-form" class="form" action="/employee" method="post">
+                            <input type="hidden" name="_id" value="{{employee._id}}"/>
                             <h3 class="text-center text-info">Login</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="fullName" id="username" class="form-control">
+                                <input type="text" name="fullName" id="username" value="{{employee.fullName}}"  class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="email" class="text-info">Email:</label><br>
-                                <input type="text" name="email" id="email" class="form-control">
+                                <input type="text" name="email" id="email" value="{{employee.email}}"  class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="mobile" class="text-info">Mobile:</label><br>
-                                <input type="text" name="mobile" id="mobile" class="form-control">
+                                <input type="text" name="mobile" id="mobile" value="{{employee.mobile}}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="city" class="text-info">City:</label><br>
-                                <input type="text" name="city" id="city" class="form-control">
+                                <input type="text" name="city" id="city" value="{{employee.city}}" class="form-control">
                             </div>
                             <div class="form-group">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
-                            </div>
-                            <div id="register-link" class="text-right">
-                                <a href="#" class="text-info">Register here</a>
+                                <a href="/employee/list" class="btn btn-secondary"><i class="fa fa-list-alt"></i> View all</a>
+
                             </div>
                         </form>
                     </div>

@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 app.set('views', path.join(__dirname, 'views/'));
 const handlebars = require('express-handlebars');
+
+app.use(express.static(__dirname + '/public'));
 // const bodyParser = require('body-parser');
 app.set('view engine', 'hbs')
 app.engine('hbs', handlebars({

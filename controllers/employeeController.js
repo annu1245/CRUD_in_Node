@@ -9,8 +9,12 @@ router.get('/', (req,res)=>{
 });
 
 router.post('/',(req,res)=>{
-  // console.log(req.body);
+  if(req.body._id == ''){
   insertRecord(req,res);
+  }
+  else{
+    updateRecord(req,res);
+  }
 });
 
 function insertRecord(req,res){
@@ -29,19 +33,58 @@ function insertRecord(req,res){
   });
 }
 
-router.get('/list/', (req,res)=>{
-  Employee.find((err,docs)=>{
+function updateRecord(req,res){
+  mongoose.set('useFindAndModify', false);
+  Employee.findOneAndUpdate({_id:req.body._id}, req.body,{new:true}, (err,doc)=>{
     if(!err){
-      console.log(docs);
-      res.render('layouts/list',{list:docs, layout:false})
+      res.redirect('employee/list');
+    }
+  })
+}
+
+router.get('/list/', (req,res)=>{
+  Employee.find({}).lean().exec((err,docs)=>{
+    if(!err){
+      res.render('layouts/list',{lst:docs, layout:'index'})
 
     }
     else{
       console.log('error:'+ err);
     }
   });
-  
 })
+
+router.get('/edit/:id/', (req,res)=>{
+  Employee.findById(req.params.id).lean().exec((err,doc)=>{
+    if(!err){
+      res.render('main',{ viewTitle:"Update Employee", virtuals: true, employee:doc, layout:'index'})
+    }
+    else{
+      res.send(err);
+    }
+  })
+})
+
+router.get('/delete/:id', (req,res)=>{
+  Employee.findByIdAndRemove(req.params.id).lean().exec((err,doc)=>{
+    if(!err){
+      res.redirect('/employee/list');
+    }
+    else{res.send(err)}
+  })
+})
+
+// router.get('/:id', (req,res)=>{
+//   Employee.findById(req.params.id,(err,doc)=>{
+//     console.log(req.params.id)
+//     // if(!err){
+//     //   res.render('employee/',{
+//     //     viewTitle : "update Employee",
+//     //     employee: doc
+//     //   });
+//     // }
+//   })
+// })
 
 
 module.exports = router;
